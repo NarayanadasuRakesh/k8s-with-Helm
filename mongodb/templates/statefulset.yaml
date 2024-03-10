@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+  namespace: roboshop
+  labels:
+    project: roboshop
+    app: mongodb
+    tier: db
+spec:
+  serviceName: "mongodb"
+  replicas: {{ .Values.statfulset.replicas }}
+  selector:
+    matchLabels:
+      project: roboshop
+      app: mongodb
+      tier: db
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        app: mongodb
+        tier: db
+    spec:
+      containers:
+      - name: mongodb
+        image: "rakeshn88/mongodb:{{ .Values.statefulset.imageVersion }}"
+        volumeMounts:
+        - name: mongodb-data
+          mountPath: /data/db
+  volumeClaimTemplate:
+  - metadata:
+      name: mongodb-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "ebs-sc"
+      resources:
+        requests:
+          storage: 1Gi
+          
