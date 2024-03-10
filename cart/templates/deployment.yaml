@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart
+  namespace: roboshop
+  labels:
+    project: roboshop
+    app: cart
+    tier: app
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      project: roboshop
+      app: cart
+      tier: app
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        app: cart
+        tier: app
+    spec:
+      containers:
+      - name: cart
+        image: "rakeshn88/cart:{{ .Values.deployment.imageVersion }}"
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: cart
+            
