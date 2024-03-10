@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  namespace: roboshop
+  labels:
+    project: roboshop
+    app: user
+    tier: app
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      project: roboshop
+      app: user
+      tier: app
+  templates:
+    metadata:
+      labels:
+        project: roboshop
+        app: user
+        tier: app
+    spec:
+      containers:
+      - name: user
+        image: "rakeshn88/user:{{ .Values.deployment.imageVersion }}"
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: user
+          
