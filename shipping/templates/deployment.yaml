@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipping
+  namespace: roboshop
+  labels:
+    project: roboshop
+    app: shipping
+    tier: app
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      project: roboshop
+      app: shipping
+      tier: app
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        app: shipping
+        tier: app
+    spec:
+      containers:
+      - name: shipping
+        image: "rakeshn88/shipping:{{ .Values.deployment.imageVersion }}"
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: shipping
