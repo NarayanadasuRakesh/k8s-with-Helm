@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: roboshop
+  labels:
+    project: roboshop
+    app: redis
+    tier: db
+spec:
+  serviceName: "redis"
+  replicas: {{ .Value.statefulset.replicas }}
+  selector:
+    matchLabels:
+      project: roboshop
+      app: redis
+      tier: db
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        app: redis
+        tier: db
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+
