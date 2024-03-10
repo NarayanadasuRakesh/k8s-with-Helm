@@ -9,7 +9,7 @@ metadata:
     tier: db
 spec:
   serviceName: "redis"
-  replicas: {{ .Value.statefulset.replicas }}
+  replicas: {{ .Values.statefulset.replicas }}
   selector:
     matchLabels:
       project: roboshop
