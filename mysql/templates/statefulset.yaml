@@ -34,4 +34,4 @@ spec:
         - "--ignore-db-dir=lost+found"
         volumeMounts:
         - name: mysql-data
-          mountPaths: /var/lib/mysql
+          mountPath: /var/lib/mysql
