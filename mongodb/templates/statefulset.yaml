@@ -9,7 +9,7 @@ metadata:
     tier: db
 spec:
   serviceName: "mongodb"
-  replicas: {{ .Values.statfulset.replicas }}
+  replicas: {{ .Values.statefulset.replicas }}
   selector:
     matchLabels:
       project: roboshop
