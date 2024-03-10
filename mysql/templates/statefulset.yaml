@@ -15,17 +15,23 @@ spec:
       project: roboshop
       app: mysql
       tier: db
-  spec:
-    containers:
-    - name: mysql
-      image: "rakeshn88/mysql:{{ .Values.statefulset.imageVersion }}"
-      envFrom:
-      - configMapRef:
-          name: mysql
-      - secretRef:
-          name: mysql
-      args:
-      - "--ignore-db-dir=lost+found"
-      volumeMounts:
-      - name: mysql-data
-        mountPaths: /var/lib/mysql
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        app: mysql
+        tier: db
+    spec:
+      containers:
+      - name: mysql
+        image: "rakeshn88/mysql:{{ .Values.statefulset.imageVersion }}"
+        envFrom:
+        - configMapRef:
+            name: mysql
+        - secretRef:
+            name: mysql
+        args:
+        - "--ignore-db-dir=lost+found"
+        volumeMounts:
+        - name: mysql-data
+          mountPaths: /var/lib/mysql
