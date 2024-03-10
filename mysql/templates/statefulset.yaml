@@ -18,7 +18,7 @@ spec:
   spec:
     containers:
     - name: mysql
-      image: "rakeshn88/mysql:{{ .Value.statefulset.imageVersion }}"
+      image: "rakeshn88/mysql:{{ .Values.statefulset.imageVersion }}"
       envFrom:
       - configMapRef:
           name: mysql
