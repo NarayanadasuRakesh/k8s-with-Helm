@@ -2,4 +2,4 @@ deployment:
   replicas: 1
   imageVersion: v1
 hpa:
-  averageUtilzation: 70
+  averageUtilization: 70
