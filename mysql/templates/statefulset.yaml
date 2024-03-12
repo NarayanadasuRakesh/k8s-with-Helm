@@ -33,7 +33,7 @@ spec:
         args:
         - "--ignore-db-dir=lost+found"
         volumeMounts:
-        - name: mysql-data-vol
+        - name: mysql-data
           mountPath: /var/lib/mysql
   volumeClaimTemplates:
   - metadata:
