@@ -35,7 +35,12 @@ spec:
         volumeMounts:
         - name: mysql-data-vol
           mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-data-vol
-        persistentVolumeClaim:
-          claimName: mysql-data
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "ebs-sc"
+      resources:
+        requests:
+          storage: 1Gi
