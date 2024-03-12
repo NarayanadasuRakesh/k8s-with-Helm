@@ -33,9 +33,9 @@ spec:
         args:
         - "--ignore-db-dir=lost+found"
         volumeMounts:
-        - name: mysql-data
+        - name: mysql-data-vol
           mountPath: /var/lib/mysql
       volumes:
-      - name: mysql-data
+      - name: mysql-data-vol
         persistentVolumeClaim:
-          claimName: ebs-sc
+          claimName: mysql-data
