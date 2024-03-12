@@ -15,15 +15,30 @@ spec:
       project: roboshop
       app: rabbitmq
       tier: db
-  spec:
-    containers:
-    - name: rabbitmq
-      image: rabbitmq
-      imagePullPolicy: Always
-      envFrom:
-      - secretRef:
-          name: rabbitmq
-      volumeMounts:
-      - name: rabbitmq-data
-        mountPath: /var/lib/rabbitmq
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        app: rabbitmq
+        tier: db
+    spec:
+      containers:
+      - name: rabbitmq
+        image: rabbitmq
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: rabbitmq
+        volumeMounts:
+        - name: rabbitmq-data
+          mountPath: /var/lib/rabbitmq
+    volumeClaimTemplates:
+    - metadata:
+        name: rabbitmq-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "ebs-sc"
+        resources:
+          requests:
+            storage: 1Gi        
         
