@@ -14,7 +14,7 @@ spec:
       project: roboshop
       app: user
       tier: app
-  templates:
+  template:
     metadata:
       labels:
         project: roboshop
