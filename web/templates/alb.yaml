@@ -18,6 +18,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: web
+            name: web # Points to the service named "web"
             port:
               number: 80
